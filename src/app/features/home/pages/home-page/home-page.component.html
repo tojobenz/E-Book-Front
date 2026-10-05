@@ -1,0 +1,48 @@
+<div class="page-container home-page">
+  <p-card styleClass="hero-card">
+    <ng-template pTemplate="title">Welcome to EBook</ng-template>
+    <ng-template pTemplate="subtitle">Your personal book management application</ng-template>
+
+    <p>Search books from our local collection or Open Library, explore, and save your favorites.</p>
+
+    <ng-template pTemplate="footer">
+      <div class="hero-actions">
+        <p-button
+          label="Browse Books"
+          icon="pi pi-book"
+          (onClick)="navigateToBooks()"
+        />
+        <p-button
+          label="My Favorites"
+          icon="pi pi-star"
+          severity="secondary"
+          [outlined]="true"
+          (onClick)="navigateToFavorites()"
+        />
+      </div>
+    </ng-template>
+  </p-card>
+
+  <div class="features-section">
+    <p-card>
+      <ng-template pTemplate="title">
+        <i class="pi pi-search"></i> Search Books
+      </ng-template>
+      <p>Find books by title, author, or ISBN from local or Open Library.</p>
+    </p-card>
+
+    <p-card>
+      <ng-template pTemplate="title">
+        <i class="pi pi-star"></i> Favorites
+      </ng-template>
+      <p>Save and manage your favorite books from any source.</p>
+    </p-card>
+
+    <p-card>
+      <ng-template pTemplate="title">
+        <i class="pi pi-info-circle"></i> Details
+      </ng-template>
+      <p>View detailed information including availability status.</p>
+    </p-card>
+  </div>
+</div>

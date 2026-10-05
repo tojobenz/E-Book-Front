@@ -1,0 +1,11 @@
+.empty-state {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+:host ::ng-deep .empty-message {
+  width: 100%;
+  max-width: 420px;
+  justify-content: center;
+}

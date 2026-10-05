@@ -1,0 +1,39 @@
+.page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.page-title h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.75rem;
+}
+
+.page-subtitle {
+  margin: 0;
+  color: var(--p-text-muted-color);
+  font-size: 0.95rem;
+}
+
+.content {
+  min-height: 320px;
+}
+
+.load-more-sentinel {
+  height: 1px;
+  width: 100%;
+}
+
+.load-more {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 0;
+}
+
+.end-of-list {
+  text-align: center;
+  color: var(--p-text-muted-color);
+  font-size: 0.875rem;
+  padding: 1rem 0 2rem;
+}

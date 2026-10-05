@@ -1,0 +1,13 @@
+.error-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+:host ::ng-deep .error-message {
+  width: 100%;
+  max-width: 480px;
+  justify-content: center;
+}

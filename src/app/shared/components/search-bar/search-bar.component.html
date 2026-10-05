@@ -1,0 +1,24 @@
+<div class="search-bar">
+  <p-iconfield class="search-field">
+    <p-inputicon styleClass="pi pi-search" />
+    <input
+      pInputText
+      type="text"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="onInputChange()"
+      (keyup.enter)="onSearch()"
+      placeholder="Search by title or author..."
+      fluid
+    />
+  </p-iconfield>
+  @if (searchTerm) {
+    <p-button
+      icon="pi pi-times"
+      severity="secondary"
+      [outlined]="true"
+      [rounded]="true"
+      ariaLabel="Clear search"
+      (onClick)="clearSearch()"
+    />
+  }
+</div>

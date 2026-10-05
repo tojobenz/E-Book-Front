@@ -1,0 +1,67 @@
+<div class="page-container book-details-page">
+  <p-button
+    label="Back to Books"
+    icon="pi pi-arrow-left"
+    severity="secondary"
+    [text]="true"
+    (onClick)="goBack()"
+  />
+
+  @if (loading()) {
+    <app-loading></app-loading>
+  }
+
+  @if (error(); as errorMessage) {
+    <app-error-message
+      [message]="errorMessage"
+      [retryAction]="retryLoad.bind(this)">
+    </app-error-message>
+  }
+
+  @if (!loading() && !error() && book(); as currentBook) {
+    <p-card styleClass="details-card">
+      <div class="book-details-content">
+        <div class="book-cover">
+          <img
+            [src]="currentBook.coverUrl || 'https://via.placeholder.com/300'"
+            [alt]="currentBook.title"
+          />
+        </div>
+
+        <div class="book-info">
+          <h1 class="book-title">{{ currentBook.title }}</h1>
+          <p class="book-author">by {{ currentBook.author }}</p>
+
+          <div class="book-meta">
+            @if (currentBook.isbn) {
+              <p-tag [value]="'ISBN: ' + currentBook.isbn" severity="secondary" />
+            }
+            @if (currentBook.publishedDate) {
+              <p-tag
+                [value]="'Published: ' + (currentBook.publishedDate | date:'mediumDate')"
+                icon="pi pi-calendar"
+                severity="info"
+              />
+            }
+          </div>
+
+          @if (currentBook.description) {
+            <p-divider />
+            <h3>Description</h3>
+            <p>{{ currentBook.description }}</p>
+          }
+
+          <div class="book-actions">
+            <p-button
+              [label]="isFavorite() ? 'Remove from Favorites' : 'Add to Favorites'"
+              [icon]="isFavorite() ? 'pi pi-star-fill' : 'pi pi-star'"
+              [severity]="isFavorite() ? 'warn' : undefined"
+              [outlined]="!isFavorite()"
+              (onClick)="toggleFavorite()"
+            />
+          </div>
+        </div>
+      </div>
+    </p-card>
+  }
+</div>

@@ -1,0 +1,37 @@
+<p-card styleClass="book-card" (click)="handleCardClick()">
+  <ng-template pTemplate="header">
+    <div class="book-cover">
+      <img
+        [src]="getBookCoverUrl() || 'https://via.placeholder.com/150'"
+        [alt]="getBookTitle()"
+      />
+    </div>
+  </ng-template>
+
+  <div class="book-body">
+    <h3 class="book-title">{{ getBookTitle() }}</h3>
+    <p class="book-author">{{ getBookAuthor() }}</p>
+
+    @if (getBookDescription()) {
+      <p class="book-description">{{ getBookDescription() }}</p>
+    }
+
+    @if (isExternal && getBookAvailability(); as availability) {
+      <p-tag
+        [value]="availability.availability || (availability.isAvailable ? 'Available' : 'Not available')"
+        [severity]="availability.isAvailable ? 'success' : 'danger'"
+      />
+    }
+  </div>
+
+  <ng-template pTemplate="footer">
+    <p-button
+      [icon]="isFavorite ? 'pi pi-star-fill' : 'pi pi-star'"
+      [label]="isFavorite ? 'Favorited' : 'Favorite'"
+      [outlined]="!isFavorite"
+      [severity]="isFavorite ? 'warn' : 'secondary'"
+      size="small"
+      (onClick)="handleFavoriteClick($event)"
+    />
+  </ng-template>
+</p-card>

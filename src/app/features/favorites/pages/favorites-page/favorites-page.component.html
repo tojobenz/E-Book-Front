@@ -1,0 +1,39 @@
+<div class="page-container favorites-page">
+  <div class="page-header">
+    <h1>My Favorites</h1>
+  </div>
+
+  <div class="content">
+    @if (loading()) {
+      <app-loading></app-loading>
+    }
+
+    @if (error(); as errorMessage) {
+      <app-error-message
+        [message]="errorMessage"
+        [retryAction]="retryLoad.bind(this)">
+      </app-error-message>
+    }
+
+    @if (!loading() && !error() && displayBooks().length === 0) {
+      <app-empty-state
+        message="No favorites yet"
+        icon="pi pi-star">
+      </app-empty-state>
+    }
+
+    @if (!loading() && !error() && displayBooks().length > 0) {
+      <div class="books-grid">
+        @for (book of displayBooks(); track trackByBookId($index, book)) {
+          <app-book-card
+            [book]="book"
+            [isFavorite]="true"
+            [isExternal]="book.isExternal"
+            (favoriteToggle)="onFavoriteToggle(book)"
+            (cardClick)="onCardClick(book)">
+          </app-book-card>
+        }
+      </div>
+    }
+  </div>
+</div>

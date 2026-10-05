@@ -1,0 +1,12 @@
+<div class="error-wrapper">
+  <p-message severity="error" [text]="message" styleClass="error-message" />
+  @if (retryAction) {
+    <p-button
+      label="Retry"
+      icon="pi pi-refresh"
+      severity="danger"
+      [outlined]="true"
+      (onClick)="handleRetry()"
+    />
+  }
+</div>

@@ -1,0 +1,59 @@
+<div class="page-container books-page">
+  <div class="page-header">
+    <div class="page-title">
+      <h1>Books</h1>
+      @if (searchMode() === 'new') {
+        <p class="page-subtitle">Nouveautés Open Library</p>
+      } @else if (searchMode() === 'search') {
+        <p class="page-subtitle">Résultats de recherche</p>
+      }
+    </div>
+    <app-search-bar (search)="onSearch($event)"></app-search-bar>
+  </div>
+
+  <div class="content">
+    @if (loading()) {
+      <app-loading></app-loading>
+    }
+
+    @if (error(); as errorMessage) {
+      <app-error-message
+        [message]="errorMessage"
+        [retryAction]="retryLoad.bind(this)">
+      </app-error-message>
+    }
+
+    @if (!loading() && !error() && displayBooks().length === 0) {
+      <app-empty-state
+        message="No books found"
+        icon="pi pi-book">
+      </app-empty-state>
+    }
+
+    @if (!loading() && !error() && displayBooks().length > 0) {
+      <div class="books-grid">
+        @for (book of displayBooks(); track trackByBookId($index, book)) {
+          <app-book-card
+            [book]="book"
+            [isFavorite]="isFavorite(book)"
+            [isExternal]="book.isExternal"
+            (favoriteToggle)="onFavoriteToggle(book)"
+            (cardClick)="onCardClick(book)">
+          </app-book-card>
+        }
+      </div>
+
+      <div #loadMoreSentinel class="load-more-sentinel" aria-hidden="true"></div>
+
+      @if (loadingMore()) {
+        <div class="load-more">
+          <app-loading></app-loading>
+        </div>
+      }
+
+      @if (!hasMore() && !loadingMore()) {
+        <p class="end-of-list">Fin de la liste</p>
+      }
+    }
+  </div>
+</div>
