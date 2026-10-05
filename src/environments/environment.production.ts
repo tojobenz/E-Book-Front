@@ -1,3 +1,3 @@
 export const environment = {
-  apiUrl: 'https://api.ebook.com/api'
+  apiUrl: 'https://e-book-back.onrender.com/api'
 };
